@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+    nginx:
+        build:
+            context: ./docker/Nginx-1.14
+            dockerfile: Dockerfile
+        volumes:
+            - ./config/Nginx:/volume/config
+            - ./data:/volume/data
+            - ./log/nginx:/volume/log
+        ports:
+            - "80:80"
+        external_links:
+            - "php72:PHP-7.2"
+        depends_on:
+            - "php72"
+        restart: always
+        networks:
+            - skynet_new
+    php72:
+        build:
+            context: ./docker/PHP-7.2
+            dockerfile: Dockerfile          
+        volumes:
+            - ./config/PHP-7.2:/volume/config
+            - ./data:/volume/data
+            - ./log/php72:/volume/log
+        restart: always
+        networks:
+            - skynet_new        
+
+networks:
+    skynet_new:
+        driver: bridge

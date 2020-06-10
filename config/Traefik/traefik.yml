@@ -1,0 +1,14 @@
+# entryPoints:
+#     http:
+#       address: :1717
+accessLog:
+    filePath: "/var/log/access.log"
+# defaultEntryPoints:
+#   - http
+# providers:
+#   docker:
+#     defaultRule: "Host(`docker.localhost`)"
+
+# API and dashboard configuration
+api:
+  insecure: true
